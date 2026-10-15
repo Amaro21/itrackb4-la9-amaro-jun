@@ -1,11 +1,10 @@
-Q1: Explain the order you placed your featured route and your detail route in, and what would happen if you swapped them.
+Q1: Which column did you make nullable, and why that one and not another?
 
-Answer: I put my featured route above my detail route since Laravel checks routes top to bottom and stop at the first match so putting the wildcard placed above a literal will swallow it. Swapping them will cause featured page broken and give me a 404 NOT FOUND if I try to go to featured page because detail route will be swallowed the featured route and thinking the featured is id, since I do not have featured id at my movie array it will trigger the abort(404). 
+Answer: I made the is_blockbuster column nullable because some movie records might not have a value for it yet and I did not make the other columns nullable because fields like title, genre, rating, and year are needed to describe a movie.
 
-Q2: What happens when someone visits an id that does not exist in your data, and what did you write to make that happen?
+Q2: Which step failed first for you, and what did the error say?
+Answer: the first step for me is B after running php artisan tinker and App\Models\Movie::create(['title' => 'Spiderman']); and the error say Illuminate\Database\Eloquent\MassAssignmentException with message 'Add [title] to fillable property to allow mass assignment on [App\Model\Movie].
 
-Answer: When someone visits an id that does not exist in my data they will see a 404 NOT FOUND in the screen. To make it happen I write if(!isset($movies[$id])) { abort(404); } in my MovieController.
+Q3: You changed no Blade file in Part D, yet your pages still work. Why not?
 
-Q3: Why do your links use route names instead of typed URLs? Give one concrete thing that would break if they did not.
-
-Answer: I used route names instead of typed URL since route name act like a permanent nickname of my route and this is a good practice in routing because if I used typed URL instead of route names changing actual URL in the future will be hard, I also need to change the typed URL to make it work and that is not a good practice and we need to avoid that. Forgive me for my bad English sir.
+Answer: I did not change any Blade files because the controller still uses the same pages. I only changed where the movie data comes from, from the JSON file to the database. The pages still work because they use the same variables to show the movies.
